@@ -10,7 +10,7 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CPP) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	$(CPP) $(CPPFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.cpp Account.hpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
