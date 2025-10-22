@@ -1,8 +1,10 @@
 #include <iostream>
+#include <cctype>
+
 
 int main(int ac, char **av)
 {
-    int i = 1;
+    int i = 0;
 
     if (ac <= 1)
     {
@@ -10,7 +12,7 @@ int main(int ac, char **av)
         return 0;
     }
 
-    while (i < ac)
+    while (++i < ac)
     {
         int j = 0;
         while (av[i][j])
@@ -19,10 +21,8 @@ int main(int ac, char **av)
             std::cout << av[i][j];
             j++;
         }
-        i++;
     }
     std::cout << std::endl;
     return 0;
 }
 
-//DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
