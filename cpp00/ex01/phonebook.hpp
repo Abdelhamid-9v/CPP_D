@@ -10,6 +10,8 @@ private:
     int contactCount;
     int nextIndex;
     
+
+    bool isPrintable(const std::string& str) const;
     std::string truncateString(const std::string& str) const;
     std::string formatField(const std::string& str) const;
     bool isValidIndex(const std::string& input, int& index) const;

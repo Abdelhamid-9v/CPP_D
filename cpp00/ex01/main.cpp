@@ -1,6 +1,7 @@
 #include "phonebook.hpp"
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 int main() {
     PhoneBook phoneBook;
@@ -12,7 +13,12 @@ int main() {
     while (1)
     {
         std::cout << "Enter a cmd: ";
-        std::getline(std::cin, cmd);
+
+        if (!std::getline(std::cin, cmd))
+        {
+            std::cout << "\n";
+            exit(1);
+        }    
         
         if (cmd == "ADD") {
             phoneBook.addContact();

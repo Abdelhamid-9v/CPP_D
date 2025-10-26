@@ -9,6 +9,14 @@ PhoneBook::PhoneBook() : contactCount(0), nextIndex(0) {
 PhoneBook::~PhoneBook() {
 }
 
+bool PhoneBook::isPrintable(const std::string& str) const {
+    for (size_t i = 0; i < str.length(); i++) {
+        if (!std::isprint(str[i]))
+            return false;
+    }
+    return true;
+}
+
 std::string PhoneBook::truncateString(const std::string& str) const {
     if (str.length() > 10) {
         return str.substr(0, 9) + ".";
@@ -44,12 +52,20 @@ void PhoneBook::addContact() {
         std::cout << "Error: First name cannot be empty." << std::endl;
         return;
     }
+    if (!isPrintable(input)) {
+        std::cout << "Error: First name must contain only printable characters." << std::endl;
+        return;
+    }
     newContact.setFirstName(input);
     
     std::cout << "Enter last name: ";
     std::getline(std::cin, input);
     if (input.empty()) {
         std::cout << "Error: Last name cannot be empty." << std::endl;
+        return;
+    }
+    if (!isPrintable(input)) {
+        std::cout << "Error: Last name must contain only printable characters." << std::endl;
         return;
     }
     newContact.setLastName(input);
@@ -60,6 +76,10 @@ void PhoneBook::addContact() {
         std::cout << "Error: Nickname cannot be empty." << std::endl;
         return;
     }
+    if (!isPrintable(input)) {
+        std::cout << "Error: Nickname must contain only printable characters." << std::endl;
+        return;
+    }
     newContact.setNickname(input);
     
     std::cout << "Enter phone number: ";
@@ -68,12 +88,20 @@ void PhoneBook::addContact() {
         std::cout << "Error: Phone number cannot be empty." << std::endl;
         return;
     }
+    if (!isPrintable(input)) {
+        std::cout << "Error: Phone number must contain only printable characters." << std::endl;
+        return;
+    }
     newContact.setPhoneNumber(input);
     
     std::cout << "Enter darkest secret: ";
     std::getline(std::cin, input);
     if (input.empty()) {
         std::cout << "Error: Darkest secret cannot be empty." << std::endl;
+        return;
+    }
+    if (!isPrintable(input)) {
+        std::cout << "Error: Darkest secret must contain only printable characters." << std::endl;
         return;
     }
     newContact.setDarkestSecret(input);
@@ -86,6 +114,7 @@ void PhoneBook::addContact() {
     
     std::cout << "Contact added successfully!" << std::endl;
 }
+
 
 void PhoneBook::displayAllContacts() const {
     if (contactCount == 0) {
