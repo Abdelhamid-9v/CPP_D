@@ -17,19 +17,14 @@ void Harl::error(void) {
 }
 
 void Harl::complain(std::string level) {
-    if (level == "DEBUG") {
-        (this->*&Harl::debug)();
-    }
-    else if (level == "INFO") {
-        (this->*&Harl::info)();
-    }
-    else if (level == "WARNING") {
-        (this->*&Harl::warning)();
-    }
-    else if (level == "ERROR") {
-        (this->*&Harl::error)();
-    }
-    else {
+    if (level == "DEBUG")
+        debug();
+    else if (level == "INFO")
+        info();
+    else if (level == "WARNING")
+        warning();
+    else if (level == "ERROR")
+        error();
+    else
         std::cout << "Unknown level: " << level << std::endl;
-    }
 }

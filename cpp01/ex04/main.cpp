@@ -4,46 +4,55 @@
 #include <cstdlib>
 
 void replaceInFile(const std::string& filename, const std::string& s1, const std::string& s2) {
-    std::ifstream inputFile(filename.c_str());
-    if (!inputFile.is_open()) {
+    std::ifstream input_file;
+    input_file.open(filename.c_str());
+    if (!input_file.is_open()) {
         std::cerr << "Error: Could not open file '" << filename << "'" << std::endl;
         exit(1);
     }
 
-    std::string outputFilename = filename + ".replace";
-    std::ofstream outputFile(outputFilename.c_str());
-    if (!outputFile.is_open()) {
-        std::cerr << "Error: Could not create file '" << outputFilename << "'" << std::endl;
-        inputFile.close();
+    std::string output_filename = filename + ".replace";
+    std::ofstream output_file;
+    output_file.open(output_filename.c_str());
+    if (!output_file.is_open()) {
+        std::cerr << "Error: Could not create file '" << output_filename << "'" << std::endl;
+        input_file.close();
         exit(1);
     }
 
-    // Read file line by line and replace occurrences
-    std::string line;
-    while (std::getline(inputFile, line)) {
+    // ----------------->    (read file line by line and replace occurrences)   <-------
+   std::string line;
+    while (std::getline(input_file, line))
+    {
         std::string result;
-        size_t pos = 0;
-        size_t foundPos = 0;
+        size_t i = 0;
 
-        while ((foundPos = line.find(s1, pos)) != std::string::npos){
-            result.append(line, pos, foundPos - pos);
-            result.append(s2);
-            pos = foundPos + s1.length();
+        while (i < line.length())
+        {
+            size_t j = 0;
+            size_t pos = i;
+            while (i < line.length() && j < s1.length() && line[i] == s1[j])
+            {
+                i++;
+                j++;
+            }
+            if (j == s1.length())
+                result += s2;
+            else {
+                result += line[pos];
+                i = pos + 1;
+            }
         }
-        
-        result.append(line, pos, line.length() - pos);
-        
-        outputFile << result;
-        
-        if (!inputFile.eof()) {
-            outputFile << std::endl;
-        }
-    }
-
-    inputFile.close();
-    outputFile.close();
     
-    std::cout << "Successfully created '" << outputFilename << "'" << std::endl;
+        output_file << result;
+        
+        if (!input_file.eof())
+            output_file << std::endl;
+    }
+    input_file.close();
+    output_file.close();
+    
+    std::cout << "Successfully created '" << output_filename << "'" << std::endl;
 }
 
 int main(int argc, char* argv[]) {

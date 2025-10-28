@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 class Test {
 private:
@@ -20,8 +21,7 @@ int main() {
     Test test;
     std::string myString = "Hello World";
     
-    std::cout << "Original string address: " << &myString << std::endl;
-    
-    test.withReference(myString);    // Same address as original
-    test.withoutReference(myString); // DIFFERENT address - it's a copy
+   std::ofstream outf;
+
+   outf.open(myString);
 }

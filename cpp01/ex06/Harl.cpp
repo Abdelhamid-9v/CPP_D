@@ -34,26 +34,20 @@ int Harl::get_levelindex(std::string level) {
     return -1;
 }
 
-void Harl::complain(std::string level) {
-    void (Harl::*functions[])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-    int index = get_levelindex(level);
-    
-    if (index >= 0) {
-        (this->*functions[index])();
-    }
-}
-
 void Harl::filter(std::string level) {
-    int levelIndex = get_levelindex(level);
+    int lvl_index = get_levelindex(level);
     
-    switch (levelIndex) {
-        case 0: // DEBUG
+    switch (lvl_index) {
+        case 0:
             this->debug();
-        case 1: // INFO
+            // fall through
+        case 1: 
             this->info();
-        case 2: // WARNING
+            // fall through
+        case 2:
             this->warning();
-        case 3: // ERROR
+            // fall through
+        case 3:
             this->error();
             break;
         default:

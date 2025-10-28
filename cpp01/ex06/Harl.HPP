@@ -13,7 +13,6 @@ private:
     int get_levelindex(std::string level);
 
 public:
-    void complain(std::string level);
     void filter(std::string level);
 };
 

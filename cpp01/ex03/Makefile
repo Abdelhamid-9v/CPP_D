@@ -1,6 +1,6 @@
 # Compiler and flags
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CPP = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Project name
 NAME = unnecessary_violence
@@ -16,11 +16,11 @@ all: $(NAME)
 
 # Linking
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	$(CPP) $(CPPFLAGS) -o $(NAME) $(OBJS)
 
 # Compilation
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 # Clean object files
 clean:

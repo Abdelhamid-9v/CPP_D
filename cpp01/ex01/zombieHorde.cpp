@@ -17,8 +17,8 @@ Zombie* zombieHorde( int N, string name )
     }
     int i = -1;
     while (++i < N)
-    {
-        /* code */
-    }
+        z[i].set_name(name);
+
+    return z;   
     
 }
