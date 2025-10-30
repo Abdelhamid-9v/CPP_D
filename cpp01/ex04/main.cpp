@@ -8,7 +8,7 @@ void replaceInFile(const std::string& filename, const std::string& s1, const std
     input_file.open(filename.c_str());
     if (!input_file.is_open()) {
         std::cerr << "Error: Could not open file '" << filename << "'" << std::endl;
-        exit(1);
+        return;
     }
 
     std::string output_filename = filename + ".replace";
@@ -17,7 +17,7 @@ void replaceInFile(const std::string& filename, const std::string& s1, const std
     if (!output_file.is_open()) {
         std::cerr << "Error: Could not create file '" << output_filename << "'" << std::endl;
         input_file.close();
-        exit(1);
+        return;
     }
 
     // ----------------->    (read file line by line and replace occurrences)   <-------

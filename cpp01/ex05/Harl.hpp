@@ -1,8 +1,7 @@
 #ifndef HARL_HPP
 #define HARL_HPP
 
-
-#include<string>
+#include <string>
 #include <iostream>
 
 class Harl
@@ -12,8 +11,11 @@ private:
     void info(void);
     void warning(void);
     void error(void);
+    
+    typedef void (Harl::*ptr)(void);
+
 public:
-   void complain(std::string level);
+    void complain(std::string level);
 };
 
 #endif

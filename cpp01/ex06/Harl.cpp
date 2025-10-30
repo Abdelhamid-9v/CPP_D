@@ -1,4 +1,4 @@
-#include"Harl.HPP"
+#include"Harl.hpp"
 
 void Harl::debug(void) {
     std::cout << "[ DEBUG ]" << std::endl;
