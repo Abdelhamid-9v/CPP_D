@@ -1,18 +1,16 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
-	name ="unknown";
 	hit_points = 100;
 	energy_points = 50;
 	attack_damage = 20;
 	std::cout << "ScavTrap default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	this->name = name;
 	hit_points = 100;
 	energy_points = 50;
 	attack_damage = 20;
@@ -22,7 +20,7 @@ ScavTrap::ScavTrap(std::string name)
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
 	std::cout << "ScavTrap copy constructor called" << std::endl;
-	*this = other;
+	// Base class already copied everything
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& other)
@@ -30,10 +28,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 	std::cout << "ScavTrap copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		this->name = other.name;
-		this->hit_points = other.hit_points;
-		this->energy_points = other.energy_points;
-		this->attack_damage = other.attack_damage;
+		ClapTrap::operator=(other); 
 	}
 	return *this;
 }

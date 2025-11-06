@@ -4,12 +4,12 @@
 int main()
 {
 	std::cout << "=== Creating ClapTraps ===" << std::endl;
-	ClapTrap clap1("CL4P-TP");
-	ClapTrap clap2("B4D-4SS");
+	ClapTrap clap1("____1____");
+	ClapTrap clap2("____2____");
 	
 	std::cout << "\n=== Testing attacks ===" << std::endl;
-	clap1.attack("B4D-4SS");
-	clap2.attack("CL4P-TP");
+	clap1.attack("____2____");
+	clap2.attack("____1____");
 	
 	std::cout << "\n=== Testing damage and repair ===" << std::endl;
 	clap1.takeDamage(5);
@@ -20,13 +20,13 @@ int main()
 	for (int i = 0; i < 12; i++)
 	{
 		std::cout << "Action " << i + 1 << ": ";
-		clap2.attack("target");
+		clap2.attack("someone");
 	}
 	
 	std::cout << "\n=== Testing edge cases ===" << std::endl;
-	clap1.attack("B4D-4SS"); // Should fail - no hit points
-	clap1.beRepaired(5);     // Should fail - no hit points
-	clap2.beRepaired(5);     // Should fail - no energy points
+	clap1.attack("____2____");     // should fail no hit points
+	clap1.beRepaired(5);           // should fail no hit points
+	clap2.beRepaired(5);           // should fail no energy points
 	
 	std::cout << "\n=== Testing copy constructor and assignment ===" << std::endl;
 	ClapTrap clap3(clap1);
