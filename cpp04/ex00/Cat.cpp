@@ -1,18 +1,26 @@
-#ifndef CAT_HPP
-#define CAT_HPP
+#include "Cat.hpp"
 
-#include "Animal.hpp"
+Cat::Cat() {
+    type = "Cat";
+    std::cout << "Cat default constructor called" << std::endl;
+}
 
-class Cat : public Animal
-{
-private:
-    /* data */
-public:
-    Cat (/* args */);
-    ~Cat ();
-};
+Cat::Cat(const Cat& other) : Animal(other) {
+    std::cout << "Cat copy constructor called" << std::endl;
+}
 
+Cat& Cat::operator=(const Cat& other) {
+    std::cout << "Cat assignment operator called" << std::endl;
+    if (this != &other) {
+        Animal::operator=(other);
+    }
+    return *this;
+}
 
+Cat::~Cat() {
+    std::cout << "Cat destructor called" << std::endl;
+}
 
-
-#endif
+void Cat::makeSound() const {
+    std::cout << "meow" << std::endl;
+}

@@ -1,14 +1,9 @@
-NAME = animals
+NAME = materia
 
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp \
-       Animal.cpp \
-       Dog.cpp \
-       Cat.cpp \
-       WrongAnimal.cpp \
-       WrongCat.cpp
+SRCS =   main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -17,7 +12,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
+%.o: %.cpp AMateria.hpp Ice.hpp Cure.hpp Character.hpp MateriaSource.hpp IMateria.hpp ICharacter.hpp	
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
