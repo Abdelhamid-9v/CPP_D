@@ -1,7 +1,7 @@
 NAME = materia
 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98# -fsanitize=address -g
 
 SRCS =   main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 
@@ -12,7 +12,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp AMateria.hpp Ice.hpp Cure.hpp Character.hpp MateriaSource.hpp IMateria.hpp ICharacter.hpp	
+%.o: %.cpp AMateria.hpp Ice.hpp Cure.hpp Character.hpp MateriaSource.hpp IMateriaSource.hpp ICharacter.hpp	
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
@@ -24,3 +24,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+# //////////////////////////////////////////////////////////////////////////////
+

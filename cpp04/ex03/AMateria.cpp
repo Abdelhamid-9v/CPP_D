@@ -1,6 +1,9 @@
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 
+AMateria::AMateria() : type("default") 
+{}
+
 AMateria::AMateria(std::string const & type) : type(type) 
 {}
 

@@ -8,11 +8,11 @@ class Character : public ICharacter {
 private:
     std::string name;
     AMateria* inventory[4];
-    
     void clearInventory();
     void copyInventory(const Character& other);
 
 public:
+    Character();
     Character(std::string const & name);
     Character(const Character& other);
     Character& operator=(const Character& other);
