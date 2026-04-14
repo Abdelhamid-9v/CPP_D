@@ -24,18 +24,14 @@ public:
 
     class full_exception : public std::exception {
     public:
-        virtual const char* what() const throw() {
-            return "Error: Span is already full!";
-        }
+        virtual const char* what() const throw();
     };
 
     int longestSpan()const;
     int  shortestSpan()const;
     class not_enough_elements_except : public std::exception {
     public:
-        virtual const char* what() const throw() {
-            return "Error: Not enough elements to calculate span!";
-        }
+        virtual const char* what() const throw();
     };
 
     template <typename T>

@@ -51,3 +51,12 @@ int Span::shortestSpan()const
     }
     return min_distance;
 }
+
+const char* Span::full_exception::what() const throw() {
+    return "Error: Span is already full!";
+}
+
+const char* Span::not_enough_elements_except::what() const throw() {
+    return "Error: Not enough elements to calculate span!";
+}
+

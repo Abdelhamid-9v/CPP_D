@@ -16,18 +16,18 @@ public:
     MutantStack& operator=(const MutantStack& o)
     {
         if (this != &o)
-            std::stack<T>::operator = (o) ;
+            std::stack<T>::operator = (o) ; //kat3iyet l operator = assli dyal stack bach ycopy data.
         return *this;
     }
     ~MutantStack(){}
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    typedef typename std::stack<T>::container_type::iterator iterator;
+    typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+    typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+    typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
-    typedef typename std::vector<T>::iterator iterator;
-    typedef typename std::vector<T>::const_iterator const_iterator;
-    typedef typename std::vector<T>::reverse_iterator reverse_iterator;
-    typedef typename std::vector<T>::const_reverse_iterator const_reverse_iterator;
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
     iterator begin()
     {
