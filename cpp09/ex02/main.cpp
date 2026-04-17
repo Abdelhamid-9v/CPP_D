@@ -3,6 +3,7 @@
 #include <deque>
 #include <string>
 #include <cctype>
+#include <algorithm>
 
 
 
@@ -19,6 +20,27 @@ int is_number(const std::string str)
     return 1;
 }
 
+
+int get_jacobsthal(int a)
+{
+
+    if (a == 0)
+        return 0;
+    if (a == 1)
+        return 1;
+    int j_prev2 = 0;
+    int j_prev1 = 1;
+    int jac = 0;
+    int i = 2;
+    while (i <= a)
+    {
+        jac = j_prev1 + (2 * j_prev2);
+        j_prev2 = j_prev1;
+        j_prev1 = jac;
+        i++;
+    }
+    return jac;
+}
 
 void sort_vec(std::vector<int>& v)
 {
@@ -65,8 +87,42 @@ void sort_vec(std::vector<int>& v)
         pend_v.push_back(v[v.size() - 1]);
     
     main_v.insert(main_v.begin(), pend_v[0]);
+
+    int jacob_indx = 3;
+    int last_inserted_indx = 1;
     
-    
+    int i = main_v.size() - 1;
+    while (++i < v.size())
+    {
+        int curr_jac = get_jacobsthal(jacob_indx);
+        if (curr_jac > pend_v.size())
+            curr_jac = pend_v.size();
+       for (int i = curr_jac - 1; i >= last_inserted_indx ; i--)
+        {
+            int current_loser = pend_v[i];
+            std::vector<int>::iterator win_it;
+            if (!p && i == (int)pend_v.size() - 1)
+                win_it = main_v.end();
+            else
+            {
+                int winner_value = -1;
+                for (int j = 0; j < pair.size(); j++)
+                {
+                    if (pair[j].second == current_loser)
+                    {
+                        winner_value = pair[j].first;
+                        break;
+                    }
+                }
+                win_it = std::lower_bound(main_v.begin(), main_v.end(), winner_value);
+            }
+            std::vector<int>::iterator it = std::lower_bound(main_v.begin(), win_it, current_loser);
+            main_v.insert(it, current_loser);
+        }
+        last_inserted_indx = curr_jac;
+        jacob_indx++;
+    }
+    v = main_v;
 }
 
 
@@ -101,6 +157,9 @@ int main (int ac , char **av)
     }
     sort_vec(vec_base);
 
-    // for(int i = 0; i < ve)
+    for(int i = 0; i < vec_base.size();i++)
+    {
+        std::cout << vec_base[i] << " ";
+    }
     return 0;
 }
