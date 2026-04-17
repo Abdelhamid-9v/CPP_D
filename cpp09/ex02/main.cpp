@@ -233,6 +233,11 @@ int main (int ac , char **av)
             std::cerr << "Error" << std::endl;
             return 1;
         }
+        if (std::find(vec_base.begin(), vec_base.end(), nb) != vec_base.end())
+        {
+            std::cerr << "Error" << std::endl;
+            return 1;
+        }
         vec_base.push_back(nb);
         deq_base.push_back(nb);
     }
