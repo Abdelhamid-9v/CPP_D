@@ -16,30 +16,57 @@ RPN::~RPN()
 
 int RPN::calc(char *str)
 {
-    std::stack<int> holder;
+    std::stack<long> holder;
+    bool nb = false;
     for (int i = 0; str[i] ; i++)
     {
         if(str[i] == ' ')
+        {
+            nb = false;
             continue;
-        else if (std::isdigit(str[i]))
+        }
+        else if (std::isdigit(str[i]) && nb)
+        {
+            std::cerr << "Error" << std::endl;
+            return 1;
+        }
+        else if (std::isdigit(str[i]) && !nb)
+        {
+            nb = true;
             holder.push(str[i] - '0');
+        }
         else if(str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
         {
+            nb = false;
             if (holder.size() < 2)
             {
                 std::cerr << "Error" << std::endl;
                 return 1;
             }
-            int val2 = holder.top();
+            long val2 = holder.top();
             holder.pop();
-            int val1 = holder.top();
+            long val1 = holder.top();
             holder.pop();
             if(str[i] == '+')
+            {
+                if(val1 + val2 > 2147483647)
+                {
+                    std::cerr << "Error" << std::endl;
+                    return 1; 
+                }
                 holder.push(val1 + val2);
+            }
             else if (str[i] == '-')
                 holder.push(val1 - val2);
             else if (str[i] == '*')
+            {
+                if(val1 * val2 > 2147483647)
+                {
+                    std::cerr << "Error" << std::endl;
+                    return 1; 
+                }
                 holder.push(val1 * val2);
+            }
             else if (str[i] == '/')
             {
                 if (val2 == 0)

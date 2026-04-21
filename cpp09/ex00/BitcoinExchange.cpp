@@ -3,8 +3,8 @@
 BitcoinExchange::BitcoinExchange() {
     std::ifstream data("data.csv");
     std::string line;
-    std::cout << "sassssssssssssssssssssssssssss]\n";
-    if (data.is_open()) {
+    if (data.is_open())
+    {
         std::getline(data, line);
         while (std::getline(data, line)) {
             size_t a = line.find(',');
@@ -76,7 +76,47 @@ int BitcoinExchange::validate_date(std::string& date) {
     return 1;
 }
 
-int BitcoinExchange::validate_value(std::string str_price, double& value) {
+bool BitcoinExchange::is_valide(std::string& s)
+{
+    size_t i = 0;
+    bool dot = false;
+    bool nbr_start = false;
+    char last;
+    while (i < s.length() && s[i] == ' ')
+        i++;
+
+    if (i < s.length() && (s[i] == '+' || s[i] == '-'))
+        i++;
+
+    while (i < s.length())
+    {
+        if (std::isdigit(s[i]))
+            nbr_start = true;
+        else if (s[i] == '.')
+        {
+            if (dot)
+                return 0;
+            dot = true;
+        } 
+        else
+            return false;
+        last  = s[i];
+        i++;
+    }
+    if (last == '.')
+        return false;
+    // std::cout <<"aaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
+    return nbr_start;
+}
+
+int BitcoinExchange::validate_value(std::string str_price, double& value)
+{
+    
+    if (!is_valide(str_price))
+    {
+        std::cout << "Error: not a valide number.\n";
+        return 0;
+    }
     value = std::strtod(str_price.c_str(), NULL);
     if (value < 0) {
         std::cout << "Error: not a positive number.\n";
@@ -95,6 +135,26 @@ void BitcoinExchange::process_input(char *filename) {
     
     if(input.is_open()) {
         std::getline(input, line);
+        size_t b = line.find('|');
+        if(b != std::string::npos)
+        {
+            std::string date = line.substr(0,b - 1);
+            std::string value = line.substr(b + 2);
+            // std::cout <<"["<< date <<"]" << std::endl;
+            // std::cout <<"["<< value << "]" <<std::endl;
+            if (date != "date" || value != "value")
+            {
+                std::cout << "Error: bad input => " << line << std::endl;
+                // return;
+            }
+
+        }else
+        {
+            std::cout << "Error: bad input => " << line << std::endl;
+            // return;
+        }
+
+
         while (std::getline(input, line)) {
             size_t a = line.find('|');
             std::string date;
@@ -103,10 +163,13 @@ void BitcoinExchange::process_input(char *filename) {
             if (a != std::string::npos) {
                 date = line.substr(0, a - 1);
                 str_price = line.substr(a + 1);
+                // std::cout <<"["<< date <<"]" << std::endl;
+                // std::cout <<"["<< str_price << "]" <<std::endl;
 
                 if (validate_date(date)) {
                     double val;
-                    if(validate_value(str_price, val)) {
+                    if(validate_value(str_price, val)) 
+                    {
                         std::map<std::string, double>::iterator it = holder.lower_bound(date);
                         
                         if (it == holder.begin() && it->first != date) {

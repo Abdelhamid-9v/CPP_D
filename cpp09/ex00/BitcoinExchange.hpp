@@ -18,6 +18,7 @@ public:
     BitcoinExchange& operator=(const BitcoinExchange& rhs);
     ~BitcoinExchange();
 
+    bool is_valide(std::string& s);
     int validate_date(std::string& date);
     int validate_value(std::string str_price, double& value);
     void process_input(char *filename);
